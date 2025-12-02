@@ -1,0 +1,1 @@
+# Zipf-s-law.-Finding-a-constant
