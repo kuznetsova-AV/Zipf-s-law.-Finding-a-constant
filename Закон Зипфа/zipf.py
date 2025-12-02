@@ -14,25 +14,20 @@ def get_words(text: str):
 
 
 def zipf_constant(filename: str, top_n: int | None = None, show_plot: bool = True):
-    # 1. читаем текст
+   
     with open(filename, 'r', encoding='utf-8') as f:
         text = f.read()
 
-    # 2. получаем список слов
-    words = get_words(text)
+      words = get_words(text)
     total_words = len(words)
     print(f"Всего слов (с повторами): {total_words}")
 
-    # 3. считаем частоты
-    counter = Counter(words)
-
-    # 4. сортируем по убыванию частоты
-    #    counter.most_common() даёт список (слово, частота)
+       counter = Counter(words)
+   
     sorted_words = counter.most_common()
     if top_n is not None:
         sorted_words = sorted_words[:top_n]
-
-    # 5. считаем константы C_r = f_r * r
+    
     constants = []
     ranks = []
     freqs = []
@@ -47,12 +42,10 @@ def zipf_constant(filename: str, top_n: int | None = None, show_plot: bool = Tru
         freqs.append(freq / total_words)  # относительная частота (для графика)
         if rank <= 20:  # чтобы не засорять вывод, печатаем первые 20
             print(f"{rank}\t{word}\t{freq}\t{C}")
-
-    # 6. оценим «среднюю» константу (по выбранным top_n словам)
+   
     avg_C = sum(constants) / len(constants)
     print(f"\nОценка константы C по {len(constants)} словам: {avg_C:.2f}")
-
-    # 7. строим график ранга–частоты (как на картинке)
+    
     if show_plot:
         plt.figure()
         plt.plot(ranks, freqs)
@@ -62,7 +55,6 @@ def zipf_constant(filename: str, top_n: int | None = None, show_plot: bool = Tru
         plt.grid(True)
         plt.show()
 
-
 if __name__ == "__main__":
-    # сюда впишите имя вашего файла с текстом
-    zipf_constant("text.txt", top_n=200, show_plot=True)
+       zipf_constant("text.txt", top_n=200, show_plot=True)
+
