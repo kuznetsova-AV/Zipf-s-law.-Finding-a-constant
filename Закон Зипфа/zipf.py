@@ -2,7 +2,6 @@ import re
 from collections import Counter
 import matplotlib.pyplot as plt
 
-
 def get_words(text: str):
     """
     Разбиваем текст на слова:
@@ -17,17 +16,17 @@ def zipf_constant(filename: str, top_n: int | None = None, show_plot: bool = Tru
    
     with open(filename, 'r', encoding='utf-8') as f:
         text = f.read()
-
-      words = get_words(text)
+  
+    words = get_words(text)
     total_words = len(words)
     print(f"Всего слов (с повторами): {total_words}")
-
-       counter = Counter(words)
-   
+ 
+    counter = Counter(words)
+    
     sorted_words = counter.most_common()
     if top_n is not None:
         sorted_words = sorted_words[:top_n]
-    
+   
     constants = []
     ranks = []
     freqs = []
@@ -45,7 +44,7 @@ def zipf_constant(filename: str, top_n: int | None = None, show_plot: bool = Tru
    
     avg_C = sum(constants) / len(constants)
     print(f"\nОценка константы C по {len(constants)} словам: {avg_C:.2f}")
-    
+   
     if show_plot:
         plt.figure()
         plt.plot(ranks, freqs)
@@ -56,5 +55,5 @@ def zipf_constant(filename: str, top_n: int | None = None, show_plot: bool = Tru
         plt.show()
 
 if __name__ == "__main__":
-       zipf_constant("text.txt", top_n=200, show_plot=True)
-
+    
+    zipf_constant("text.txt", top_n=200, show_plot=True)
